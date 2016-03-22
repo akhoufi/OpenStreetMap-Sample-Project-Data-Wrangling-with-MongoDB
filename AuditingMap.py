@@ -19,18 +19,18 @@ filename='tunis_tunisia.osm'
 #                print  tag.attrib['k']      
 
 #check if all the way tag name are in the same language
-for _,element in ET.iterparse(filename):
-    if element.tag=='tag':
-        for tag in element.iter('tag'):
-            if tag.attrib['k']=='name':
-                print tag.attrib['v']
-                
-#check phone numbers and fax numbers different formats
 #for _,element in ET.iterparse(filename):
 #    if element.tag=='tag':
 #        for tag in element.iter('tag'):
-#            if 'phone' in tag.attrib['k'] or 'fax' in tag.attrib['k'] or 'tel' in tag.attrib['k']:
+#            if tag.attrib['k']=='name':
 #                print tag.attrib['v']
+                
+#check phone numbers and fax numbers different formats
+for _,element in ET.iterparse(filename):
+    if element.tag=='tag':
+        for tag in element.iter('tag'):
+            if 'phone' in tag.attrib['k'] or 'fax' in tag.attrib['k'] or 'tel' in tag.attrib['k']:
+                print tag.attrib['v']
 #                
 ##check emails different formats
 #for _,element in ET.iterparse(filename):
