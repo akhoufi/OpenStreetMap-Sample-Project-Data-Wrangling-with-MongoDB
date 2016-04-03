@@ -77,7 +77,25 @@ def list_country(filename):
         for tag in element.iter('tag'):
             if 'governorate' in tag.attrib['k'] and tag.attrib['v'] not in governorate_set:
                 governorate_set.add(tag.attrib['v'])
-    return governorate_set   
+    return governorate_set  
+    
+def list_country(filename):
+    governorate_set=set([])
+    for _,element in ET.iterparse(filename):
+        for tag in element.iter('tag'):
+            if 'governorate' in tag.attrib['k'] and tag.attrib['v'] not in governorate_set:
+                governorate_set.add(tag.attrib['v'])
+    return governorate_set
+    
+def list_street_names(filename):
+    street_names_set=set()
+    for _,element in ET.iterparse(filename):
+        for tag in element.iter('tag'):
+            street_name=tag.attrib['v'].split()[0]
+            if 'street' in tag.attrib['k'] and street_name not in street_names_set:
+                street_names_set.add(street_name)
+    return street_names_set
+    
 def audit():
     filename='tunis_tunisia.osm'
 #    list_tags(filename)
@@ -92,8 +110,11 @@ def audit():
 #    print('#################################################')
 #    list_postcodes(filename)
 #    print('#################################################')
-    governorate=count_governorate(filename)
-    print 'Number of governorates',len(governorate)
-    print governorate
+#    governorate=count_governorate(filename)
+#    print 'Number of governorates',len(governorate)
+#    print governorate
+    streets=list_street_names(filename)
+    print len(streets)
+    print streets
 audit()
     
