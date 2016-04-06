@@ -8,19 +8,24 @@ import xml.etree.cElementTree as ET
 import re
 
 
-street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
-mapping = { "Imp2": "Impasse",
-            "R.": "Rue",
-            "Av":"Avenue",
-            "Imp.":"Impasse"
+street_type_re_1 = re.compile(r'^\S+\.?', re.IGNORECASE)
+street_type_re_2= re.compile(r'^\S+\.', re.IGNORECASE)
+
+
+mapping = { "Imp2": "Impasse ",
+            "R.": "Rue ",
+            "Av":"Avenue ",
+            "Imp.":"Impasse "
             }    
     
 def clean_street_name(name):
-    m = street_type_re.search(name)
+    m = street_type_re_2.search(name) or street_type_re_1.search(name)
     if m:
         street_type = m.group()
         if street_type in mapping:
-            name=name.replace(street_type,mapping[street_type])
+            new_name=name.replace(street_type,mapping[street_type])
+            print name,' => ', new_name
+            name=new_name
     return name
 
 def clean_phone_number(phone_number):
@@ -35,12 +40,12 @@ def clean_phone_numbers(phone_numbers):
         
             
 def clean():
-#    filename='tunis_tunisia.osm'
-#    osm_file = open(filename, "r")
-#    for event, elem in ET.iterparse(osm_file, events=("start",)):
-#        if elem.tag == "node" or elem.tag == "way":
-#            for tag in elem.iter("tag"):
-#                if tag.attrib['k'] == "addr:street":
-#                    print tag.attrib['v'],' => ', clean_street_name(tag.attrib['v'])
-   print clean_phone_numbers('+216-71.200 300 / 22883387')                
+    filename='tunis_tunisia.osm'
+    osm_file = open(filename, "r")
+    for event, elem in ET.iterparse(osm_file, events=("start",)):
+        if elem.tag == "node" or elem.tag == "way":
+            for tag in elem.iter("tag"):
+                if tag.attrib['k'] == "addr:street":
+                    clean_street_name(tag.attrib['v'])
+#   print clean_phone_numbers('+216-71.200 300 / 22883387')                
 clean()

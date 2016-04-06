@@ -64,7 +64,7 @@ def list_postcodes(filename):
             
 #check if number of governorate is right
 def count_governorate(filename):
-    governorate_set=set([])
+    governorate_set=set()
     for _,element in ET.iterparse(filename):
         for tag in element.iter('tag'):
             if 'governorate' in tag.attrib['k'] and tag.attrib['v'] not in governorate_set:
@@ -72,15 +72,7 @@ def count_governorate(filename):
     return governorate_set              
                 
 def list_country(filename):
-    governorate_set=set([])
-    for _,element in ET.iterparse(filename):
-        for tag in element.iter('tag'):
-            if 'governorate' in tag.attrib['k'] and tag.attrib['v'] not in governorate_set:
-                governorate_set.add(tag.attrib['v'])
-    return governorate_set  
-    
-def list_country(filename):
-    governorate_set=set([])
+    governorate_set=set()
     for _,element in ET.iterparse(filename):
         for tag in element.iter('tag'):
             if 'governorate' in tag.attrib['k'] and tag.attrib['v'] not in governorate_set:
