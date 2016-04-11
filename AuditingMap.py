@@ -90,8 +90,8 @@ def list_street_names(filename):
     
 def audit():
     filename='tunis_tunisia.osm'
-#    list_tags(filename)
-#    print('#################################################')
+    list_tags(filename)
+    print('#################################################')
 #    list_tag_names(filename)
 #    print('#################################################')
 #    list_phone_numbers(filename)
@@ -105,8 +105,8 @@ def audit():
 #    governorate=count_governorate(filename)
 #    print 'Number of governorates',len(governorate)
 #    print governorate
-    streets=list_street_names(filename)
-    print len(streets)
-    print streets
+#    streets=list_street_names(filename)
+#    print len(streets)
+#    print streets
 audit()
     
