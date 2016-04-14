@@ -71,7 +71,7 @@ def shape_element(element):
             elif elem.tag=='tag':
                 if 'street' in elem.attrib['k']:
                     value=clean_street_name(elem.attrib['v'])
-                elif'phone' or 'fax' in elem.attrib['k']:
+                elif ('phone' or 'fax') in elem.attrib['k']:
                     value=clean_phone_numbers(elem.attrib['v'])
                 else: 
                     value=elem.attrib['v']

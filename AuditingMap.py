@@ -7,7 +7,14 @@ Created on Mon Mar 21 12:00:06 2016
 
 import xml.etree.cElementTree as ET
 
-
+#Count number of node and way tags
+def count_nodes_ways(filename):
+    i=0
+    for _,element in ET.iterparse(filename):
+        if element.tag=='way' or element.tag=='node' :
+            i+=1  
+    return i
+    
 #find what 'k' tags exists on the map
 def list_tags(filename):
     tag_set=set()
@@ -90,7 +97,8 @@ def list_street_names(filename):
     
 def audit():
     filename='tunis_tunisia.osm'
-    list_tags(filename)
+    print 'Number of nodes and ways= ',count_nodes_ways(filename)
+#    list_tags(filename)
     print('#################################################')
 #    list_tag_names(filename)
 #    print('#################################################')

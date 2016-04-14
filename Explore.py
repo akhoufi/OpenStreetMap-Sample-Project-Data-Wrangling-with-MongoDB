@@ -8,10 +8,9 @@ import json
 
 from pymongo import MongoClient
 client = MongoClient("mongodb://localhost:27017")
-db = client.tunisia
-with open('tunis_tunisia.osm.json') as f:
-    data=[]
-    for line in f:
-        data .append(json.loads(line))
-    db.tunisia.insert(data)
-    print db.tunisia.find_one()
+db = client.p3
+print db.tunisia.find().count() 
+print  db.tunisia.find({"type":"node"}).count()
+print  db.tunisia.find({"type":"way"}).count()
+print db.tunisia.distinct({"created.user"}).length
+db.tunisia.aggregate([{"$match":{"amenity":{"$exists":1}}}, {"$group":{"_id":"$amenity","count":{"$sum":1}}}, {"$sort":{"count":­1}}, {"$limit":10}])
